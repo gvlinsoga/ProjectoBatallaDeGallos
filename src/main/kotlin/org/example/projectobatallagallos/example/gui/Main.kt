@@ -9,7 +9,7 @@ import java.io.IOException
 class Main : Application() {
     @Throws(IOException::class)
     override fun start(stage: Stage) {
-        val fxmlLoader = FXMLLoader(Main::class.java.getResource("main-menu.fxml"))
+        val fxmlLoader = FXMLLoader(Main::class.java.getResource("src/main/resources/org/example/projectobatallagallos/gui/main-menu.fxml"))
         val scene = Scene(fxmlLoader.load())
         stage.title = "Batalla de Gallos - Menú Principal"
         stage.scene = scene

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0"
+            prefWidth="375.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.projectobatallagallos.example.gui.MenuController">
+    <content>
+        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+              minWidth="-Infinity" prefHeight="465.0" prefWidth="375.0" spacing="2.0"
+              xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+            <children>
+                <Label text="Nuevo Gallo"/>
+                <ImageView id="userAvatar" fx:id="userAvatar" fitHeight="170.0" fitWidth="170.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <VBox.margin>
+                        <Insets top="22.0"/>
+                    </VBox.margin>
+                    <image>
+                        <Image url="@../images/mittens.png"/>
+                    </image>
+                </ImageView>
+                <Label id="nombreAvatar" fx:id="nombreAvatar" text="Mittens">
+                    <VBox.margin>
+                        <Insets bottom="8.0"/>
+                    </VBox.margin>
+                </Label>
+                <Button fx:id="changeAvatarButton" mnemonicParsing="false" onAction="#cambiarAvatar"
+                        text="Cambiar Avatar">
+                    <VBox.margin>
+                        <Insets bottom="20.0"/>
+                    </VBox.margin>
+                </Button>
+                <TextField fx:id="userName" prefHeight="25.0" prefWidth="200.0" promptText="Nombre"/>
+                <DatePicker fx:id="cumField" promptText="Fecha de nacimiento">
+                    <VBox.margin>
+                        <Insets top="10.0"/>
+                    </VBox.margin>
+                </DatePicker>
+            </children>
+            <padding>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+            </padding>
+        </VBox>
+    </content>
+</DialogPane>

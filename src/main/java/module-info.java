@@ -19,5 +19,7 @@ module org.example.projectobatallagallos {
     requires kotlinx.serialization.json;
 
     opens org.example.projectobatallagallos to javafx.fxml;
+    opens org.example.projectobatallagallos.example.gui to javafx.fxml;
     exports org.example.projectobatallagallos;
+    exports org.example.projectobatallagallos.example.gui;
 }

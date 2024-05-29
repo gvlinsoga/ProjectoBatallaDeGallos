@@ -1,11 +1,41 @@
 package org.example.projectobatallagallos.example.gui
 
-import org.example.projectobatallagallos.example.models.Participante
+import javafx.application.Application
+import javafx.fxml.FXMLLoader
+import javafx.scene.Parent
+import javafx.scene.Scene
+import javafx.stage.Stage
 
+class GameplayController : Application() {
+
+
+    override fun start(primaryStage: Stage?) {
+        val root: Parent = FXMLLoader.load(javaClass.getResource("/resources/gameplay.fxml"))
+        primaryStage?.title = "Batalla de Gallos - Arena"
+        primaryStage?.scene = Scene(root)
+        primaryStage?.show()
+    }
+
+}
+
+
+/*
+package org.example.batalladegallos.gui
+
+import java.io.File
+import java.util.*
+import java.util.regex.Pattern
+
+class Gallo(
+    val apodo: String,
+    val urlFotoPerfil: String,
+    var palabras: List<String> = listOf(),
+    var puntuacion: Int = 0
+)
 
 class GameplayController {
     private var palabrasSeleccionadas: Map<String, List<String>> = emptyMap()
-    var gallos: List<Participante> = listOf()
+    var gallos: List<Gallo> = listOf()
     var temporizador = Temporizador()
 
     fun iniciarJuego(filePath: String) {
@@ -13,6 +43,12 @@ class GameplayController {
         palabrasSeleccionadas = agruparPalabrasRimadas(palabras)
         val seleccionadas = seleccionarPalabrasParaJuego(palabrasSeleccionadas)
 
+
+        //HE PUESTO ESTOS GALLOS SIMULANDO QUE YA ESTÁN CREADOS, SE TIENEN QUE MODIFICAR - POR HACER :D
+        gallos = listOf(
+            Gallo("Gallo1", "url1.jpg", seleccionadas[0]),
+            Gallo("Gallo2", "url2.jpg", seleccionadas[1])
+        )
 
         gallos.forEach {
             println("${it.apodo}: ${it.palabras.joinToString(", ")}")
@@ -43,7 +79,7 @@ class GameplayController {
         return palabras
     }
 
-    private fun agruparPalabrasRimadas(palabras: Set<String>): Map<String, List<String>> {
+    private fun agruparPalabrasRimadas(palabras: Set<String>): List<Palabras> {
     val gruposDeRimas = mutableMapOf<String, MutableList<String>>()
 
     palabras.forEach { palabra ->
@@ -58,7 +94,7 @@ class GameplayController {
 }
 
 
-    private fun seleccionarPalabrasParaJuego(gruposDeRimas: Map<String, List<String>>): List<Palabras> {
+    private fun seleccionarPalabrasParaJuego(gruposDeRimas: List<Palabras>): List<Palabras> {
     return gruposDeRimas.shuffled().take(2).map { grupo ->
         Palabras(grupo.rima, grupo.palabrasDisponibles.shuffled().take((19..20).random()).toMutableList())
     }
@@ -99,4 +135,4 @@ fun main() {
     controller.iniciarJuego("src/main/kotlin/org/example/BatallaDeGallos/Persistence/TirantLoBlanc_Caps1_99.txt")
 }
 
-
+ */

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1280.0" layoutX="501.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../Group%201%20(2).png" />
+         </image>
+      </ImageView>
+      <VBox alignment="TOP_CENTER" layoutX="767.0" layoutY="100.0" prefHeight="620.0" prefWidth="450.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="760.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <Text id="player2" strokeType="OUTSIDE" strokeWidth="0.0" text="MR GRUMPERS" textAlignment="CENTER">
+               <font>
+                  <Font size="28.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="8.0" top="50.0" />
+               </VBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SCORE:" />
+            <ImageView id="player2pfp" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@phpsqZdvj.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="16.0" top="16.0" />
+               </VBox.margin>
+            </ImageView>
+            <ProgressBar prefHeight="18.0" prefWidth="385.0" progress="0.0" />
+            <MenuButton id="characterPlayer2" contentDisplay="CENTER" mnemonicParsing="false" text="VER PALABRAS" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <MenuItem mnemonicParsing="false" text="Action 2" />
+               </items>
+               <VBox.margin>
+                  <Insets top="12.0" />
+               </VBox.margin>
+            </MenuButton>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="68.0" layoutY="78.0" prefHeight="620.0" prefWidth="450.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="760.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <Text id="player1" strokeType="OUTSIDE" strokeWidth="0.0" text="MITTENS" textAlignment="CENTER">
+               <font>
+                  <Font size="28.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="8.0" top="50.0" />
+               </VBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SCORE:" />
+            <ImageView id="player1pfp" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@phpCJNhHT.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="16.0" top="16.0" />
+               </VBox.margin>
+            </ImageView>
+            <ProgressBar prefHeight="18.0" prefWidth="385.0" progress="0.0">
+               <VBox.margin>
+                  <Insets bottom="14.0" />
+               </VBox.margin>
+            </ProgressBar>
+            <MenuButton id="characterPlayer1" contentDisplay="TOP" mnemonicParsing="false" text="VER PALABRAS" textAlignment="CENTER">
+               <contextMenu>
+                  <ContextMenu>
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                     </items>
+                  </ContextMenu>
+               </contextMenu>
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Nuevo gallo" />
+                  <MenuItem mnemonicParsing="false" text="Mittens" />
+               </items>
+               <VBox.margin>
+                  <Insets top="12.0" />
+               </VBox.margin>
+            </MenuButton>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="590.0" layoutY="78.0" prefHeight="620.0" prefWidth="100.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="590.0" AnchorPane.rightAnchor="590.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="468.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="540.0" layoutY="14.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

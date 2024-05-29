@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<DialogPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.projectobatallagallos.example.gui.MenuController">
+    <content>
+        <GridPane hgap="14.0" maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="703.0" vgap="20.0">
+            <children>
+                <VBox maxHeight="+Infinity" maxWidth="+Infinity" minHeight="-Infinity" prefWidth="400.0" spacing="7.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <children>
+                        <Label fx:id="messageLabel" alignment="CENTER" prefHeight="19.0" prefWidth="485.0" text="Nuevo Gallo" wrapText="true">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="6.0" />
+                            </VBox.margin>
+                        </Label>
+                        <VBox prefHeight="158.0" prefWidth="469.0">
+                            <children>
+                                <TextField fx:id="nameField" promptText="Nombre">
+                                    <VBox.margin>
+                                        <Insets top="18.0" />
+                                    </VBox.margin>
+                                </TextField>
+                                <TextField fx:id="cumField" promptText="Cumpleaños">
+                                    <VBox.margin>
+                                        <Insets top="18.0" />
+                                    </VBox.margin>
+                                </TextField>
+                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                        <Label alignment="TOP_LEFT" text="Puntuación:">
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                        </Label>
+                                        <Text fx:id="scorePoints" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                            <HBox.margin>
+                                                <Insets left="14.0" />
+                                            </HBox.margin>
+                                            <rotationAxis>
+                                                <Point3D />
+                                            </rotationAxis>
+                                        </Text>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+                <HBox maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+                        <HBox fx:id="actionParent" alignment="CENTER">
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </HBox>
+                        <Pane maxWidth="+Infinity" prefHeight="43.0" prefWidth="295.0" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+                <VBox alignment="CENTER" prefHeight="255.0" prefWidth="192.0">
+                    <children>
+                        <ImageView fx:id="userAvatar" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                            <VBox.margin>
+                                <Insets bottom="14.0" />
+                            </VBox.margin>
+                            <image>
+                                <Image url="@../images/Catspurrov.png" />
+                            </image>
+                        </ImageView>
+                        <MenuButton fx:id="avatarsMenu" mnemonicParsing="false" text="Avatar">
+                            <items>
+                                <MenuItem id="angryCatItem" fx:id="angryCatItem" mnemonicParsing="false" onAction="#changeAvatar" text="Angry Cat" />
+                                <MenuItem id="catspurrovItem" fx:id="catspurrovItem" mnemonicParsing="false" onAction="#changeAvatar" text="Catspurrov" />
+                                <MenuItem id="mittensItem" fx:id="mittensItem" mnemonicParsing="false" onAction="#changeAvatar" text="Mittens" />
+                                <MenuItem id="mrGrumpItem" fx:id="mrGrumpItem" mnemonicParsing="false" onAction="#changeAvatar" text="Mr Grump" />
+                                <MenuItem id="scaredyCatItem" fx:id="scaredyCatItem" mnemonicParsing="false" onAction="#changeAvatar" text="Scaredy Cat" />
+                            </items>
+                        </MenuButton>
+                    </children>
+                </VBox>
+            </children>
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" maxWidth="266.0" minWidth="-Infinity" prefWidth="192.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="Infinity" minWidth="-Infinity" prefWidth="469.0" />
+            </columnConstraints>
+            <padding>
+                <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
+            </padding>
+            <rowConstraints>
+                <RowConstraints maxHeight="Infinity" minHeight="-Infinity" prefHeight="221.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="71.0" minHeight="-Infinity" prefHeight="31.0" vgrow="NEVER" />
+            </rowConstraints>
+        </GridPane>
+    </content>
+</DialogPane>

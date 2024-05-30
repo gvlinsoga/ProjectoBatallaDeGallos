@@ -14,6 +14,7 @@ import org.example.rakata.example.models.Participante
 import java.io.File
 import java.io.IOException
 import java.nio.file.Paths
+import java.util.*
 
 class MenuController {
     @FXML
@@ -41,9 +42,7 @@ class MenuController {
             jugarBoton.setOnAction {
                 siguientePantalla()
             }
-            rankingBoton.setOnAction {
-                verRanking()
-            }
+
             salirBoton.setOnAction {
                 salir()
             }
@@ -85,25 +84,19 @@ class MenuController {
         val dialogPane = fxmlLoader.load<DialogPane>()
         dialog.dialogPane = dialogPane
 
-        // Add the default buttons
         dialog.dialogPane.buttonTypes.addAll(ButtonType.OK, ButtonType.CANCEL)
 
         val controller = fxmlLoader.getController<MenuController>()
-
-        // Handle the button click events
         dialog.resultConverter = Callback<ButtonType, Participante> { buttonType ->
             if (buttonType == ButtonType.OK) {
                 controller.guardarFecha()
                 controller.guardarGallo()
-                Participante(controller.userName.text, controller.cumple, 0, "") // Assuming 0 as initial score
+                Participante(controller.userName.text, controller.cumple, 0, "")
             } else {
                 null
             }
         }
-
         val result = dialog.showAndWait()
-
-        // If the "Aceptar" button was clicked, add the new character to the participants list
         result.ifPresent { participant ->
             participants.add(participant)
         }
@@ -150,26 +143,11 @@ class MenuController {
     fun guardarGallo() {
         val nombre = userName.text
         val avatar = imageNames[currentAvatarIndex]
-        GlobalData.participants.add(Participante(nombre, avatar, 0,""))
+        GlobalData.participants.add(Participante(nombre, avatar, 0, ""))
         println("Nombre: $nombre, Cumpleaños: $cumple")
         println("participantes: ${GlobalData.participants}")
     }
 
-
-
-
-    @FXML
-    fun verRanking() {
-        siguientePantalla = "/org/example/batalladegallos/gui/ranking-screen.fxml"
-        siguienteTitulo = "Batalla de Gallos - Ranking"
-        val stage = (rankingBoton.scene.window as Stage)
-        val fxmlLoader = FXMLLoader(javaClass.getResource(siguientePantalla))
-        val scene = Scene(fxmlLoader.load())
-        stage.title = siguienteTitulo
-        stage.scene = scene
-        stage.show()
-        val rankingController = fxmlLoader.getController<RankingController>()
-    }
 
 
     fun salir() {

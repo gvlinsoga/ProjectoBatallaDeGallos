@@ -1,138 +1,173 @@
 package org.example.rakata.example.gui
 
-import javafx.application.Application
+import javafx.animation.KeyFrame
+import javafx.animation.Timeline
+import javafx.collections.FXCollections
+import javafx.event.ActionEvent
+import javafx.event.EventHandler
+import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
 import javafx.scene.Scene
+import javafx.scene.control.*
+import javafx.scene.text.Text
 import javafx.stage.Stage
+import javafx.util.Duration
+import org.example.rakata.example.models.Palabras
+import org.example.rakata.example.models.Participante
+import kotlin.random.Random
 
-class GameplayController : Application() {
+class GameController {
+
+    @FXML
+    lateinit var timerPlayer1: ProgressBar
+    @FXML
+    lateinit var timerPlayer2: ProgressBar
+    @FXML
+    var roundCounter: Text  = Text()
+    @FXML
+    lateinit var player1Name: Text
+    @FXML
+    lateinit var player2Name: Text
+    @FXML
+    lateinit var goRankingButton: Button
+    @FXML
+    var aplaudimetroProgress: ProgressBar = ProgressBar()
+    @FXML
+    var aplausosContador: Label = Label()
+    @FXML
+    var rondaCounter: Label = Label()
+    @FXML
+    var tiempoPlayer1 : Label = Label()
+    @FXML
+    var tiempoPlayer2 : Label = Label()
+    @FXML
+    var scorePlayer1 : Label = Label()
+    @FXML
+    var scorePlayer2 : Label = Label()
+    @FXML
+    private lateinit var menuPalabrasPlayer1: MenuButton
+    @FXML
+    private lateinit var menuPalabrasPlayer2: MenuButton
+    @FXML
+    lateinit var avatarPlayer1: javafx.scene.image.ImageView
+    @FXML
+    lateinit var avatarPlayer2: javafx.scene.image.ImageView
+
+    private lateinit var player1: Participante
+    private lateinit var player2: Participante
 
 
-    override fun start(primaryStage: Stage?) {
-        val root: Parent = FXMLLoader.load(javaClass.getResource("/resources/gameplay.fxml"))
-        primaryStage?.title = "Batalla de Gallos - Arena"
-        primaryStage?.scene = Scene(root)
-        primaryStage?.show()
+    private var currentRound = 0
+    private var currentPlayer = 1
+    var siguientePantalla = ""
+    var siguienteTitulo = ""
+
+    private val palabrasPlayer1 = Palabras("Rima 1", mutableListOf("Palabra 1", "Palabra 2", "Palabra 3"))
+    private val palabrasPlayer2 = Palabras("Rima 2", mutableListOf("Palabra 4", "Palabra 5", "Palabra 6"))
+
+    fun initialize(player1Data: Participante, player2Data: Participante) {
+        player1 = player1Data
+        player2 = player2Data
+        player1Name.text = player1.nombre
+        player2Name.text = player2.nombre
+        updateAvatar(player1.urlFotoPerfil, avatarPlayer1)
+        //    updateAvatar(player2.urlFotoPerfil, avatarPlayer2)
+        updateMenuItemsWords()
+        startRound()
+
     }
 
-}
 
+    private fun updateAvatar(url: String, imageView: javafx.scene.image.ImageView) {
+        val avatarPath = "/org/example/batalladegallos/images/$url"
+        val image = javafx.scene.image.Image(javaClass.getResource(avatarPath).toExternalForm())
+        imageView.setImage(image)
+    }
+    private fun updateMenuItemsWords() {
+        menuPalabrasPlayer1.items.clear()
+        menuPalabrasPlayer2.items.clear()
+        addWordsToMenu(palabrasPlayer1, menuPalabrasPlayer1)
+        addWordsToMenu(palabrasPlayer2, menuPalabrasPlayer2)
+    }
 
-/*
-package org.example.batalladegallos.gui
+    private fun addWordsToMenu(palabras: Palabras, menu: MenuButton) {
+        palabras.palabrasDisponibles.forEach { word ->
+            val menuItem = MenuItem(word)
+            menu.items.add(menuItem)
+        }
+    }
 
-import java.io.File
-import java.util.*
-import java.util.regex.Pattern
+    private fun startRound() {
+        currentRound++
+        roundCounter.text = "Round: $currentRound"
+        player1Name.text = player1.nombre
+        player2Name.text = player2.nombre
+        startTimer()
+    }
 
-class Gallo(
-    val apodo: String,
-    val urlFotoPerfil: String,
-    var palabras: List<String> = listOf(),
-    var puntuacion: Int = 0
-)
-
-class GameplayController {
-    private var palabrasSeleccionadas: Map<String, List<String>> = emptyMap()
-    var gallos: List<Gallo> = listOf()
-    var temporizador = Temporizador()
-
-    fun iniciarJuego(filePath: String) {
-        val palabras = leerArchivo(filePath)
-        palabrasSeleccionadas = agruparPalabrasRimadas(palabras)
-        val seleccionadas = seleccionarPalabrasParaJuego(palabrasSeleccionadas)
-
-
-        //HE PUESTO ESTOS GALLOS SIMULANDO QUE YA ESTÁN CREADOS, SE TIENEN QUE MODIFICAR - POR HACER :D
-        gallos = listOf(
-            Gallo("Gallo1", "url1.jpg", seleccionadas[0]),
-            Gallo("Gallo2", "url2.jpg", seleccionadas[1])
+    private fun startTimer() {
+        println("Starting timer")
+        val players = listOf(timerPlayer1, timerPlayer2)
+        val labels = listOf(tiempoPlayer1, tiempoPlayer2)
+        val scores = listOf(scorePlayer1, scorePlayer2)
+        val timeline = Timeline(
+            KeyFrame(Duration.seconds(1.0), EventHandler<ActionEvent> {
+                val currentPlayerProgressBar = players[currentPlayer - 1]
+                val currentPlayerLabel = labels[currentPlayer - 1]
+                val currentPlayerScore = scores[currentPlayer - 1]
+                updateProgressBar(currentPlayerProgressBar)
+                if (currentPlayerProgressBar.progress <= 0) {
+                    switchPlayer(currentPlayerProgressBar, currentPlayerScore, players, labels)
+                }
+                updateLabel(currentPlayerProgressBar, currentPlayerLabel)
+            })
         )
-
-        gallos.forEach {
-            println("${it.apodo}: ${it.palabras.joinToString(", ")}")
-        }
-
-        temporizador.iniciar()
+        timeline.cycleCount = Timeline.INDEFINITE
+        timeline.play()
     }
 
-    private fun leerArchivo(filePath: String): Set<String> {
-        val file = File(filePath)
-        val palabras = mutableSetOf<String>()
-        val pattern = Pattern.compile("\\b[\\p{L}&&[^\\p{P}]]{4,}\\b")
+    private fun updateProgressBar(progressBar: ProgressBar) {
+        progressBar.progress -= 1.0 / 30
+    }
 
-        if (file.exists()) {
-            file.readLines().forEach { linea ->
-                val matcher = pattern.matcher(linea.toLowerCase())
-                while (matcher.find()) {
-                    val palabra = matcher.group()
-                    if (!palabra.any { it.isDigit() }) {
-                        palabras.add(palabra)
-                    }
-                }
+    private fun switchPlayer(currentPlayerProgressBar: ProgressBar, currentPlayerScore: Label, players: List<ProgressBar>, labels: List<Label>) {
+        currentPlayerProgressBar.style = "-fx-accent: gray;"
+        try {
+            currentPlayerScore.text = (currentPlayerScore.text.toDouble() + aplaudimetroProgress.progress).toString()
+        } catch (e: NumberFormatException) {
+            currentPlayerScore.text = aplaudimetroProgress.progress.toString()
+            println("Error: ${e.message}")
+        }
+        currentPlayer = 3 - currentPlayer
+        val nextPlayerProgressBar = players[currentPlayer - 1]
+        val nextPlayerLabel = labels[currentPlayer - 1]
+        nextPlayerProgressBar.progress = 1.0
+        nextPlayerProgressBar.style = "-fx-accent: blue;"
+        nextPlayerLabel.text = "${(nextPlayerProgressBar.progress * 30).toInt()} segundos restantes"
+        if (currentPlayer == 1) {
+            currentRound++
+            if (currentRound < 3) {
+                startRound()
+            } else {
+                goRanking()
             }
-        } else {
-            println("El archivo no existe")
-        }
-
-        return palabras
-    }
-
-    private fun agruparPalabrasRimadas(palabras: Set<String>): List<Palabras> {
-    val gruposDeRimas = mutableMapOf<String, MutableList<String>>()
-
-    palabras.forEach { palabra ->
-        val rima = extraerUltimaSilaba(palabra)
-        if (rima.isNotEmpty()) {
-            gruposDeRimas.getOrPut(rima) { mutableListOf() }.add(palabra)
         }
     }
 
-    return gruposDeRimas.filter { it.value.size >= 20 }
-            .map { Palabras(it.key, it.value) }
-}
+    private fun updateLabel(progressBar: ProgressBar, label: Label) {
+        label.text = "${(progressBar.progress * 30).toInt()} segundos restantes"
+    }
 
-
-    private fun seleccionarPalabrasParaJuego(gruposDeRimas: List<Palabras>): List<Palabras> {
-    return gruposDeRimas.shuffled().take(2).map { grupo ->
-        Palabras(grupo.rima, grupo.palabrasDisponibles.shuffled().take((19..20).random()).toMutableList())
+    fun goRanking() {
+        siguientePantalla = "/org/example/batalladegallos/gui/ranking-screen.fxml"
+        siguienteTitulo = "Batalla de Gallos - Ranking"
+        val stage = (goRankingButton.scene.window as Stage)
+        val fxmlLoader = FXMLLoader(javaClass.getResource(siguientePantalla))
+        val scene = Scene(fxmlLoader.load())
+        stage.title = siguienteTitulo
+        stage.scene = scene
+        stage.show()
+        val rankingController = fxmlLoader.getController<RankingController>()
+        rankingController.initialize(player1, player2)
     }
 }
-
-    private fun extraerUltimaSilaba(palabra: String): String {
-        val regex = "([aeiouAEIOU]+[^aeiouAEIOU]*$)".toRegex()
-        return regex.find(palabra)?.value ?: ""
-    }
-}
-
-class Temporizador {
-    private var timer: Timer? = null
-    fun iniciar() {
-        timer = Timer()
-        timer?.schedule(object : TimerTask() {
-            var segundos = 60 // Duración de un minuto
-
-            override fun run() {
-                if (segundos > 0) {
-                    println("Tiempo restante: $segundos segundos")
-                    segundos--
-                } else {
-                    println("Tiempo finalizado.")
-                    cancelar()
-                }
-            }
-        }, 0, 1000)
-    }
-    fun cancelar() {
-        timer?.cancel()
-        println("Temporizador detenido.")
-    }
-}
-
-fun main() {
-    val controller = GameplayController()
-    controller.iniciarJuego("src/main/kotlin/org/example/BatallaDeGallos/Persistence/TirantLoBlanc_Caps1_99.txt")
-}
-
- */

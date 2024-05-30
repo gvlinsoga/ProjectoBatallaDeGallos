@@ -42,7 +42,7 @@ fun getParticipantes() {
             val participantes: List<Participante> = Json.decodeFromString(responseBody)
             println("Los participantes registrados son:")
             participantes.forEach { participante ->
-                println("Nom: ${participante.nombre} Data: ${participante.dataNaixement}")
+                println("Nom: ${participante.nombre} Data: ${participante.cumpleanos}")
             }
         } else {
             println("The response body is empty.")

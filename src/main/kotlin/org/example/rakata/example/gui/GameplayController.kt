@@ -149,7 +149,7 @@ class GameController {
         if (currentPlayer == 1) {
             currentRound++
             rondaCounter.text = "Round: $currentRound"
-            if (currentRound < 3) {
+            if (currentRound < 4) {
                 startRound()
             } else {
                 goRanking()
@@ -180,12 +180,12 @@ class GameController {
 
             if (currentPlayer != 1) {
                 player1.puntuacion += score
-                scorePlayer1.text = player1.puntuacion.toString()
+                scorePlayer1.text = "Score: ${player1.puntuacion}"
             } else {
                 player2.puntuacion += score
-                scorePlayer2.text = player2.puntuacion.toString()
+                scorePlayer2.text =  "Score: ${player2.puntuacion}"
             }
-            aplausosContador.text = (" Aplausos $score")
+            aplausosContador.text = ("Aplausos: $score")
         } else {
             primerCop = false
         }

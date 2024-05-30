@@ -8,13 +8,13 @@ import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
 import javafx.scene.control.*
-import javafx.scene.effect.Glow
 import javafx.scene.image.Image
 import javafx.scene.text.Text
 import javafx.stage.Stage
 import javafx.util.Duration
 import org.example.rakata.example.models.Palabras
 import org.example.rakata.example.models.Participante
+import kotlin.random.Random
 
 class GameController {
 
@@ -61,6 +61,7 @@ class GameController {
     private var currentPlayer = 1
     var siguientePantalla = ""
     var siguienteTitulo = ""
+    var primerCop = true
 
     private val palabrasPlayer1 = Palabras("Rima 1", mutableListOf("Palabra 1", "Palabra 2", "Palabra 3"))
     private val palabrasPlayer2 = Palabras("Rima 2", mutableListOf("Palabra 4", "Palabra 5", "Palabra 6"))
@@ -127,6 +128,7 @@ class GameController {
                     switchPlayer(currentPlayerProgressBar, currentPlayerScore, players, labels)
                 }
                 updateLabel(currentPlayerProgressBar, currentPlayerLabel)
+
             })
         )
         timeline.cycleCount = Timeline.INDEFINITE
@@ -139,13 +141,6 @@ class GameController {
 
     private fun switchPlayer(currentPlayerProgressBar: ProgressBar, currentPlayerScore: Label, players: List<ProgressBar>, labels: List<Label>) {
         currentPlayerProgressBar.style = "-fx-accent: gray;"
-        try {
-            currentPlayerScore.text = (currentPlayerScore.text.toDouble() + aplaudimetroProgress.progress).toString()
-
-        } catch (e: NumberFormatException) {
-
-            println("Error: ${e.message}")
-        }
         currentPlayer = 3 - currentPlayer
         val nextPlayerProgressBar = players[currentPlayer - 1]
         val nextPlayerLabel = labels[currentPlayer - 1]
@@ -160,6 +155,7 @@ class GameController {
                 goRanking()
             }
         }
+        aplaudimetroProgress()
 
     }
 
@@ -173,6 +169,26 @@ class GameController {
             label.text = "$secondsLeft segundos"
         }
 
+    }
+
+    fun aplaudimetroProgress() {
+        if (!primerCop) {
+            val randomProgress = Random.nextDouble()
+            aplaudimetroProgress.progress = randomProgress
+
+            val score = (randomProgress * 100).toInt()
+
+            if (currentPlayer != 1) {
+                player1.puntuacion += score
+                scorePlayer1.text = player1.puntuacion.toString()
+            } else {
+                player2.puntuacion += score
+                scorePlayer2.text = player2.puntuacion.toString()
+            }
+            aplausosContador.text = (" Aplausos $score")
+        } else {
+            primerCop = false
+        }
     }
 
 

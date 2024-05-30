@@ -1,4 +1,4 @@
-package org.example.projectobatallagallos
+package org.example.rakata.example
 
 import javafx.fxml.FXML
 import javafx.scene.control.Label

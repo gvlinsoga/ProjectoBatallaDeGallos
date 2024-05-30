@@ -37,8 +37,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'org.example.projectobatallagallos'
-    mainClass = 'org.example.projectobatallagallos.HelloApplication'
+    mainModule = 'org.example.rakata.example.gui'
+    mainClass = 'org.example.rakata.example.HelloApplication'
 }
 kotlin {
     jvmToolchain(17)

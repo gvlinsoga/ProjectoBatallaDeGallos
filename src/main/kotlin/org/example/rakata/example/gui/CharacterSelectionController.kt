@@ -1,4 +1,4 @@
-package org.example.projectobatallagallos.example.gui
+package org.example.rakata.example.gui
 
 import javafx.collections.ListChangeListener
 import javafx.event.ActionEvent
@@ -10,7 +10,7 @@ import javafx.scene.control.MenuButton
 import javafx.scene.control.MenuItem
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
-import org.example.projectobatallagallos.example.models.Participante
+import org.example.rakata.example.models.Participante
 
 class CharacterSelectionController {
 

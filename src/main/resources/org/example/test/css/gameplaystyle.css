@@ -1,0 +1,71 @@
+.sedgwick-ave-display {
+    font-family: "Sedgwick Ave Display";
+    font-weight: 400;
+    font-style: normal;
+}
+
+#player1,
+#player1Name,
+#scorePlayer1,
+#tiempoPlayer1,
+#characterPlayer1 {
+    -fx-font-family: "Sedgwick Ave", cursive;
+    -fx-font-size: 28px;
+    -fx-fill: #0000FF;
+}
+
+#player2,
+#player2Name,
+#scorePlayer2,
+#tiempoPlayer2,
+#characterPlayer2 {
+    -fx-font-family: "Sedgwick Ave", cursive;
+    -fx-font-size: 28px;
+    -fx-fill: #FF0000;
+}
+
+#characterPlayer1,
+#characterPlayer2 {
+    -fx-font-size: 20px;
+    -fx-background-color: #FECC16;
+    -fx-text-fill: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+}
+
+#characterPlayer1:hover,
+#characterPlayer2:hover {
+    -fx-background-color: #FECC16;
+    -fx-effect: dropshadow(gaussian, #FFFF00, 20, 0.5, 0, 0);
+}
+
+#timerPlayer1,
+#timerPlayer2 {
+    -fx-background-color: #FFFFFF;
+    -fx-accent: #0000FF;
+}
+
+#timerPlayer1,
+#timerPlayer2 {
+    -fx-effect: dropshadow(gaussian, #0000FF, 20, 0.5, 0, 0);
+}
+
+#aplausosContador {
+    -fx-font-family: "Sedgwick Ave Display";
+    -fx-font-size: 18px;
+    -fx-fill: #FFFFFF; /* White */
+}
+
+#aplaudimetroProgress {
+    -fx-background-color: #FFFFFF;
+    -fx-accent: #FF0000; /* Red for player2 */
+}
+
+#aplaudimetroProgress {
+    -fx-effect: dropshadow(gaussian, #FF0000, 20, 0.5, 0, 0);
+}
+
+.anchor-pane {
+    -fx-background-color: linear-gradient(#DD0741, #293178);
+}

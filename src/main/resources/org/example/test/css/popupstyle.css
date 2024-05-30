@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'GraffittiFont';
+    src: url('../../../fonts/sedgwickavedisplay-regular.ttf');
+}
+.root {
+    -fx-font-family: 'GraffittiFont';
+}
+
+#nombreAvatar {
+    -fx-font-family: 'GraffittiFont';
+    -fx-font-size: 16px;
+}
+
+#changeAvatarButton,
+.dialog-pane > .button-bar > .button {
+    -fx-font-family: 'GraffittiFont';
+    -fx-font-size: 16px;
+    -fx-background-color: #FECC16;
+    -fx-text-fill: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+}
+
+#changeAvatarButton:hover,
+.dialog-pane > .button-bar > .button:hover {
+    -fx-background-color: #FECC16;
+    -fx-effect: dropshadow(gaussian, #FFFF00, 20, 0.5, 0, 0);
+}
+
+#userAvatar {
+    -fx-effect: dropshadow(gaussian, #FFFF00, 20, 0.5, 0, 0);
+}
+
+.dialog-pane {
+    -fx-background-color: linear-gradient(#DD0741, #293178);
+}
+
+.dialog-pane > *.content {
+    -fx-background-color: transparent;
+}

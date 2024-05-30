@@ -2,19 +2,19 @@ package org.example.rakata.example.gui
 
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
-import javafx.collections.FXCollections
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
 import javafx.scene.control.*
+import javafx.scene.effect.Glow
+import javafx.scene.image.Image
 import javafx.scene.text.Text
 import javafx.stage.Stage
 import javafx.util.Duration
 import org.example.rakata.example.models.Palabras
 import org.example.rakata.example.models.Participante
-import kotlin.random.Random
 
 class GameController {
 
@@ -65,17 +65,17 @@ class GameController {
     private val palabrasPlayer1 = Palabras("Rima 1", mutableListOf("Palabra 1", "Palabra 2", "Palabra 3"))
     private val palabrasPlayer2 = Palabras("Rima 2", mutableListOf("Palabra 4", "Palabra 5", "Palabra 6"))
 
-    fun initialize(player1Data: Participante, player2Data: Participante) {
-        player1 = player1Data
-        player2 = player2Data
-        player1Name.text = player1.nombre
-        player2Name.text = player2.nombre
-        updateAvatar(player1.urlFotoPerfil, avatarPlayer1)
-        //    updateAvatar(player2.urlFotoPerfil, avatarPlayer2)
-        updateMenuItemsWords()
-        startRound()
+fun initialize(player1Data: Participante, player2Data: Participante) {
+    player1 = player1Data
+    player2 = player2Data
+    player1Name.text = player1.nombre
+    player2Name.text = player2.nombre
+    updateAvatar(player1.urlFotoPerfil, avatarPlayer1)
+    updateAvatar(player2.urlFotoPerfil, avatarPlayer2)
+    updateMenuItemsWords()
+    startRound()
 
-    }
+}
 
 
     private fun updateAvatar(url: String, imageView: javafx.scene.image.ImageView) {
@@ -94,6 +94,12 @@ class GameController {
         palabras.palabrasDisponibles.forEach { word ->
             val menuItem = MenuItem(word)
             menu.items.add(menuItem)
+            menuItem.setOnAction {
+                menuItem.isDisable = true
+                menuItem.style = "-fx-text-fill: gray;"
+                palabras.palabrasUsadas.add(word)
+                palabras.palabrasDisponibles.remove(word)
+            }
         }
     }
 
@@ -130,33 +136,56 @@ class GameController {
         progressBar.progress -= 1.0 / 30
     }
 
-    private fun switchPlayer(currentPlayerProgressBar: ProgressBar, currentPlayerScore: Label, players: List<ProgressBar>, labels: List<Label>) {
-        currentPlayerProgressBar.style = "-fx-accent: gray;"
-        try {
-            currentPlayerScore.text = (currentPlayerScore.text.toDouble() + aplaudimetroProgress.progress).toString()
-        } catch (e: NumberFormatException) {
-            currentPlayerScore.text = aplaudimetroProgress.progress.toString()
-            println("Error: ${e.message}")
-        }
-        currentPlayer = 3 - currentPlayer
-        val nextPlayerProgressBar = players[currentPlayer - 1]
-        val nextPlayerLabel = labels[currentPlayer - 1]
-        nextPlayerProgressBar.progress = 1.0
-        nextPlayerProgressBar.style = "-fx-accent: blue;"
-        nextPlayerLabel.text = "${(nextPlayerProgressBar.progress * 30).toInt()} segundos restantes"
-        if (currentPlayer == 1) {
-            currentRound++
-            if (currentRound < 3) {
-                startRound()
-            } else {
-                goRanking()
-            }
+ private fun switchPlayer(currentPlayerProgressBar: ProgressBar, currentPlayerScore: Label, players: List<ProgressBar>, labels: List<Label>) {
+    currentPlayerProgressBar.style = "-fx-accent: gray;"
+    try {
+        currentPlayerScore.text = (currentPlayerScore.text.toDouble() + aplaudimetroProgress.progress).toString()
+    } catch (e: NumberFormatException) {
+        currentPlayerScore.text = aplaudimetroProgress.progress.toString()
+        println("Error: ${e.message}")
+    }
+    currentPlayer = 3 - currentPlayer
+    val nextPlayerProgressBar = players[currentPlayer - 1]
+    val nextPlayerLabel = labels[currentPlayer - 1]
+    nextPlayerProgressBar.progress = 1.0
+    nextPlayerProgressBar.style = "-fx-accent: blue;"
+    nextPlayerLabel.text = "${(nextPlayerProgressBar.progress * 30).toInt()} segundos restantes"
+    if (currentPlayer == 1) {
+        currentRound++
+        if (currentRound < 3) {
+            startRound()
+        } else {
+            goRanking()
         }
     }
+    // Call updatePlayerTurn function when the player's turn changes
+    updatePlayerTurn(currentPlayer == 1)
+}
 
     private fun updateLabel(progressBar: ProgressBar, label: Label) {
         label.text = "${(progressBar.progress * 30).toInt()} segundos restantes"
     }
+
+
+fun updatePlayerTurn(isPlayer1Turn: Boolean) {
+    val glow = Glow(0.8)
+
+    if (isPlayer1Turn) {
+        avatarPlayer1.image = Image("/images/${player1.urlFotoPerfil}")
+        tiempoPlayer1.text = "Current Time"
+        avatarPlayer1.effect = glow
+        avatarPlayer2.image = Image("/images/${player2.urlFotoPerfil.substringBeforeLast('.') + "BN" + player2.urlFotoPerfil.substringAfterLast('.')}")
+        tiempoPlayer2.text = "Esperando Turno"
+        avatarPlayer2.effect = null
+    } else {
+        avatarPlayer1.image = Image("/images/${player1.urlFotoPerfil.substringBeforeLast('.') + "BN" + player1.urlFotoPerfil.substringAfterLast('.')}")
+        tiempoPlayer1.text = "Esperando Turno"
+        avatarPlayer1.effect = null
+        avatarPlayer2.image = Image("/images/${player2.urlFotoPerfil}")
+        tiempoPlayer2.text = "Current Time"
+        avatarPlayer2.effect = glow
+    }
+}
 
     fun goRanking() {
         siguientePantalla = "/org/example/batalladegallos/gui/ranking-screen.fxml"

@@ -27,17 +27,16 @@ class MenuController {
     var siguientePantalla = ""
     var siguienteTitulo = ""
 
-
-
     fun mainMenu() {
-
         try {
             loreBoton.setOnAction {
                 explorarArchivos()
+                checkConditionsAndDisableButton() // Check conditions after a file is chosen
             }
             nuevoGalloBoton.setOnAction {
                 crearNuevoPersonaje()
                 cambiarAvatar()
+                checkConditionsAndDisableButton() // Check conditions after a new character is created
             }
             jugarBoton.setOnAction {
                 siguientePantalla()
@@ -46,6 +45,8 @@ class MenuController {
             salirBoton.setOnAction {
                 salir()
             }
+
+            checkConditionsAndDisableButton() // Check conditions after the main menu is loaded
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -140,18 +141,21 @@ class MenuController {
         println("Saved date: $cumple")
     }
 
-    fun guardarGallo() {
-        val nombre = userName.text
-        val avatar = imageNames[currentAvatarIndex]
-        GlobalData.participants.add(Participante(nombre, avatar, 0, ""))
-        println("Nombre: $nombre, Cumpleaños: $cumple")
-        println("participantes: ${GlobalData.participants}")
-    }
+fun guardarGallo() {
+    val nombre = userName.text
+    val avatar = imageNames[currentAvatarIndex]
+    GlobalData.participants.add(Participante(nombre, avatar, 0, ""))
+    println("Nombre: $nombre, Cumpleaños: $cumple")
+    println("participantes: ${GlobalData.participants}")
+}
 
-
+fun checkConditionsAndDisableButton() {
+    jugarBoton.isDisable = GlobalData.participants.size < 2 || loreBoton.text == "Seleccionar Lore..."
+}
 
     fun salir() {
         Platform.exit()
     }
 
 }
+

@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'GraffittiFont';
+    src: url('../../../fonts/sedgwickavedisplay-regular.ttf');
+}
+.root {
+    -fx-font-family: 'GraffittiFont';
+}
+#botonLore, #nuevoGalloBoton, #jugarBoton, #botonSalir {
+    -fx-font-family: 'GraffittiFont';
+    -fx-font-size: 16px;
+    -fx-background-color: #FECC16;
+    -fx-text-fill: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+}
+
+/* Hover effect with glow */
+#botonLore:hover, #nuevoGalloBoton:hover, #jugarBoton:hover, #botonSalir:hover {
+    -fx-background-color: #FECC16;
+    -fx-effect: dropshadow(gaussian, #FFFF00, 20, 0.5, 0, 0);
+}
+
+#logo {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0.05, 0, 0);
+}

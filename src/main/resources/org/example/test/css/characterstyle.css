@@ -1,0 +1,75 @@
+/* Define the custom font */
+.sedgwick-ave-display-regular {
+    font-family: "Sedgwick Ave Display";
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* MenuButton specific styles */
+#menuButtonPlayer1 {
+    -fx-font-size: 16px;
+    -fx-background-color: #ADD8E6; /* Light Blue for player1 */
+    -fx-text-fill: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+}
+
+#menuButtonPlayer1 .menu-item {
+    -fx-font-size: 16px;
+    -fx-background-color: #ADD8E6; /* Light Blue for player1 */
+    -fx-text-fill: black;
+}
+
+#menuButtonPlayer2 {
+    -fx-font-size: 16px;
+    -fx-background-color: #FF7F7F; /* Light Red for player2 */
+    -fx-text-fill: black;
+}
+
+#menuButtonPlayer2 .menu-item {
+    -fx-font-size: 16px;
+    -fx-background-color: #FF7F7F; /* Light Red for player2 */
+    -fx-text-fill: black;
+}
+
+/* Style for the iniciarBatallaBoton */
+#iniciarBatallaBoton {
+    -fx-font-family: "Sedgwick Ave Display";
+    -fx-font-size: 16px;
+    -fx-background-color: #FFFF00; /* Yellow */
+    -fx-text-fill: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+}
+
+/* Hover effect with glow for iniciarBatallaBoton */
+#iniciarBatallaBoton:hover {
+    -fx-font-family: "Sedgwick Ave Display";
+    -fx-background-color: #FFFF00;
+    -fx-effect: dropshadow(gaussian, #FFFF00, 20, 0.5, 0, 0);
+}
+
+#player1 {
+    -fx-font-family: "Sedgwick Ave Display";
+    -fx-fill: #293178;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 1);
+}
+
+#player2 {
+    -fx-font-family: "Sedgwick Ave Display";
+    -fx-fill: #DD0741;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 1);
+}
+#vsText {
+    -fx-fill: yellow;
+}
+
+#button {
+    -fx-text-fill: yellow;
+}
+
+.menu-item {
+    -fx-alignment: center;
+}

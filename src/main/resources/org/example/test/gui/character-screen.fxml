@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -7,51 +8,91 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.rakata.example.gui.CharacterSelectionController">
+   <stylesheets>
+      <URL value="@../css/characterstyle.css" />
+   </stylesheets>
+
    <children>
-      <ImageView fitHeight="800.0" fitWidth="1280.0" layoutX="675.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="800.0" fitWidth="1280.0" layoutX="183.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../images/rankingFondo.jpg" />
-         </image>
-      </ImageView>
-      <VBox layoutX="1127.0" layoutY="23.0" prefHeight="122.0" prefWidth="100.0">
+            <Image url="@../images/personajesFondo.jpg" />
+         </image></ImageView>
+      <VBox alignment="TOP_CENTER" layoutX="58.0" layoutY="68.0" prefHeight="620.0" prefWidth="450.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="775.0" AnchorPane.topAnchor="65.0">
          <children>
-            <ImageView fitHeight="138.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+            <Text id="player1" fx:id="gallo1" strokeType="OUTSIDE" strokeWidth="0.0" text="GALLO 1" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets bottom="8.0" top="50.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Text>
+            <ImageView id="player1pfp" fx:id="avatarPlayer1" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets bottom="16.0" top="16.0" />
+               </VBox.margin>
+               <image>
+                  <Image url="@../images/avatarEmpty.png" />
+               </image>
+            </ImageView>
+            <MenuButton fx:id="menuButtonPlayer1" mnemonicParsing="false" text="Personaje 1">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="757.0" layoutY="90.0" prefHeight="620.0" prefWidth="450.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="775.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="65.0">
+         <children>
+            <Text id="player2" fx:id="gallo2" strokeType="OUTSIDE" strokeWidth="0.0" text="GALLO 2" textAlignment="CENTER">
+               <font>
+                  <Font size="28.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="8.0" top="50.0" />
+               </VBox.margin>
+            </Text>
+            <ImageView id="player2pfp" fx:id="avatarPlayer2" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/avatarEmpty.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="16.0" top="16.0" />
+               </VBox.margin>
+            </ImageView>
+            <MenuButton fx:id="menuButtonPlayer2" mnemonicParsing="false" text="Personaje 2">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="517.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="800.0" prefWidth="246.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="517.0" AnchorPane.rightAnchor="517.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="249.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/logo.png" />
                </image>
+               <VBox.margin>
+                  <Insets top="16.0" />
+               </VBox.margin>
             </ImageView>
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" layoutX="446.0" layoutY="15.0" prefHeight="155.0" prefWidth="210.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RANKING GALLOS">
+            <Text id="versusText" fx:id="vsText" strokeType="OUTSIDE" strokeWidth="0.0" text="VS" textAlignment="CENTER" wrappingWidth="56.40799903869629">
                <font>
-                  <Font size="48.0" />
+                  <Font size="58.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="200.0" top="80.0" />
+               </VBox.margin>
             </Text>
+            <Button id="button" fx:id="iniciarBatallaBoton" alignment="CENTER" mnemonicParsing="false" onAction="#iniciarBatalla" text="¡A LA BATALLA!" textAlignment="CENTER">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
-      <VBox alignment="CENTER" layoutX="519.0" layoutY="634.0" prefHeight="47.0" prefWidth="242.0">
-         <children>
-            <Button fx:id="irMenuBoton" mnemonicParsing="false" text="Menú">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin></Button>
-            <Button fx:id="salirBoton" mnemonicParsing="false" text="Salir">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin></Button>
-         </children></VBox>
-      <AnchorPane layoutX="485.0" layoutY="170.0" prefHeight="412.0" prefWidth="307.0">
-         <children>
-            <TableView fx:id="tableView" prefHeight="412.0" prefWidth="311.0">
-               <columns>
-                  <TableColumn fx:id="nombreColumn" prefWidth="102.0" text="Avatar" />
-                  <TableColumn fx:id="urlFotoPerfilColumn" minWidth="0.0" prefWidth="107.0" text="Nombre" />
-                  <TableColumn fx:id="puntuacionColumn" prefWidth="102.0" text="Nº Victorias" />
-               </columns>
-            </TableView>
-         </children>
-      </AnchorPane>
    </children>
 </AnchorPane>

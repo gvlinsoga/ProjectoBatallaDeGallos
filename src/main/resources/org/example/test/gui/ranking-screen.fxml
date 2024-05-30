@@ -45,11 +45,11 @@
       <AnchorPane layoutX="485.0" layoutY="170.0" prefHeight="412.0" prefWidth="307.0">
          <children>
             <TableView fx:id="tableView" prefHeight="412.0" prefWidth="311.0">
-               <columns>
-                  <TableColumn fx:id="nombreColumn" prefWidth="102.0" text="Avatar" />
-                  <TableColumn fx:id="urlFotoPerfilColumn" minWidth="0.0" prefWidth="107.0" text="Nombre" />
+              <columns>
+                <TableColumn fx:id="nombreColumn" prefWidth="102.0" text="Avatar" />
+                <TableColumn fx:id="urlFotoPerfilColumn" minWidth="0.0" prefWidth="107.0" text="Nombre" />
                   <TableColumn fx:id="puntuacionColumn" prefWidth="102.0" text="Nº Victorias" />
-               </columns>
+              </columns>
             </TableView>
          </children>
       </AnchorPane>

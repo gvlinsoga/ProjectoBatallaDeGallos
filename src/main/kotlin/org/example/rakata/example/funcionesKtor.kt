@@ -1,7 +1,5 @@
-package org.example.projectobatallagallos.example
+package org.example.rakata.example
 
-import org.example.projectobatallagallos.example.models.Palabras
-import org.example.projectobatallagallos.example.models.Participante
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
@@ -11,6 +9,8 @@ import io.ktor.util.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import org.example.rakata.example.models.Palabras
+import org.example.rakata.example.models.Participante
 
 fun getPalabras() {
     val client = HttpClient(CIO)

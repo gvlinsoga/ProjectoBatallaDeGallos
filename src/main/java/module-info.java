@@ -1,4 +1,4 @@
-module org.example.projectobatallagallos {
+module org.example.rakata {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -18,8 +18,11 @@ module org.example.projectobatallagallos {
     requires io.ktor.utils;
     requires kotlinx.serialization.json;
 
-    opens org.example.projectobatallagallos to javafx.fxml;
-    opens org.example.projectobatallagallos.example.gui to javafx.fxml;
-    exports org.example.projectobatallagallos;
-    exports org.example.projectobatallagallos.example.gui;
+    // Open packages to javafx.fxml for reflection
+    opens org.example.rakata.example to javafx.fxml;
+    opens org.example.rakata.example.gui to javafx.fxml;
+
+    // Export packages for use by other modules
+    exports org.example.rakata.example;
+    exports org.example.rakata.example.gui;
 }

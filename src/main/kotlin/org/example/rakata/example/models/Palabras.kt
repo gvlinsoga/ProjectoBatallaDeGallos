@@ -1,4 +1,4 @@
-package org.example.projectobatallagallos.example.models
+package org.example.rakata.example.models
 
 import kotlinx.serialization.Serializable
 

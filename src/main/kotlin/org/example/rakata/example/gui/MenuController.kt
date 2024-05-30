@@ -1,4 +1,4 @@
-package org.example.projectobatallagallos.example.gui
+package org.example.rakata.example.gui
 
 import javafx.application.Platform
 import javafx.fxml.FXML
@@ -10,7 +10,7 @@ import javafx.scene.image.ImageView
 import javafx.stage.FileChooser
 import javafx.stage.Stage
 import javafx.util.Callback
-import org.example.projectobatallagallos.example.models.Participante
+import org.example.rakata.example.models.Participante
 import java.io.File
 import java.io.IOException
 import java.nio.file.Paths

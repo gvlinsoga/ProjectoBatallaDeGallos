@@ -1,4 +1,4 @@
-package org.example.projectobatallagallos
+package org.example.rakata.example
 
 import javafx.application.Application
 import javafx.fxml.FXMLLoader

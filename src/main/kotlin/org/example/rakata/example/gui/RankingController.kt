@@ -1,4 +1,4 @@
-package org.example.projectobatallagallos.example.gui
+package org.example.rakata.example.gui
 
 import javafx.fxml.FXML
 import javafx.scene.control.ListCell
@@ -6,7 +6,7 @@ import javafx.scene.control.ListView
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.util.Callback
-import org.example.projectobatallagallos.example.models.Participante
+import org.example.rakata.example.models.Participante
 
 class RankingController {
     @FXML

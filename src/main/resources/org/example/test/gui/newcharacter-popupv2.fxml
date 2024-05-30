@@ -7,7 +7,7 @@
 
 <DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0"
             prefWidth="375.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.projectobatallagallos.example.gui.MenuController">
+            fx:controller="org.example.rakata.example.gui.MenuController">
     <content>
         <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
               minWidth="-Infinity" prefHeight="465.0" prefWidth="375.0" spacing="2.0"

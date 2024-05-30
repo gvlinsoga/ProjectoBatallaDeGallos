@@ -141,21 +141,22 @@ class MenuController {
         println("Saved date: $cumple")
     }
 
-fun guardarGallo() {
-    val nombre = userName.text
-    val avatar = imageNames[currentAvatarIndex]
-    GlobalData.participants.add(Participante(nombre, avatar, 0, ""))
-    println("Nombre: $nombre, Cumpleaños: $cumple")
-    println("participantes: ${GlobalData.participants}")
-}
+    fun guardarGallo() {
+        val nombre = userName.text
+        val avatar = imageNames[currentAvatarIndex]
+        GlobalData.participants.add(Participante(nombre, avatar, 0, ""))
+        println("Nombre: $nombre, Cumpleaños: $cumple")
+        println("participantes: ${GlobalData.participants}")
+    }
 
-fun checkConditionsAndDisableButton() {
-    jugarBoton.isDisable = GlobalData.participants.size < 2 || loreBoton.text == "Seleccionar Lore..."
-}
+    fun checkConditionsAndDisableButton() {
+        jugarBoton.isDisable = GlobalData.participants.size < 2 || loreBoton.text == "Lore"
+    }
 
     fun salir() {
         Platform.exit()
     }
 
 }
+
 

@@ -29,12 +29,12 @@ class CharacterSelectionController {
     var siguienteTitulo = ""
 
 
-@FXML
-lateinit var menuButtonPlayer2: MenuButton
-@FXML
-lateinit var menuButtonPlayer1: MenuButton
+    @FXML
+    lateinit var menuButtonPlayer2: MenuButton
+    @FXML
+    lateinit var menuButtonPlayer1: MenuButton
 
-var listaPersona = mutableListOf<Participante>()
+    var listaPersona = mutableListOf<Participante>()
 
     companion object {
         lateinit var instance: CharacterSelectionController
@@ -76,127 +76,124 @@ var listaPersona = mutableListOf<Participante>()
             return true
         }
         return false
-}
+    }
 
     fun initialize() {
         updateMenuItemsPlayer()
     }
 
-private fun changeAvatar(participant: Participante, player: Int) {
-    val avatarPath = "/org/example/batalladegallos/images/${participant.urlFotoPerfil}"
-    val image = Image(javaClass.getResource(avatarPath).toExternalForm())
-    if (player == 1) {
-        avatarPlayer1.image = image
-    } else if (player == 2) {
-        avatarPlayer2.image = image
+    private fun changeAvatar(participant: Participante, player: Int) {
+        val avatarPath = "/org/example/batalladegallos/images/${participant.urlFotoPerfil}"
+        val image = Image(javaClass.getResource(avatarPath).toExternalForm())
+        if (player == 1) {
+            avatarPlayer1.image = image
+        } else if (player == 2) {
+            avatarPlayer2.image = image
+        }
+    }
+
+
+
+    fun iniciarBatalla() {
+        iniciarBatallaBoton.setOnAction {
+            siguientePantalla = "/org/example/batalladegallos/gui/game-screen.fxml"
+            siguienteTitulo = "Batalla de Gallos - Arena de Combate"
+            val currentStage = iniciarBatallaBoton.scene.window as Stage
+            val fxmlLoader = FXMLLoader(javaClass.getResource(siguientePantalla))
+            val newScene = Scene(fxmlLoader.load())
+            currentStage.title = siguienteTitulo
+            currentStage.scene = newScene
+            currentStage.show()
+
+            val gameController = fxmlLoader.getController<GameController>()
+            val player2 = selectedPlayer2 ?: Participante("Default Player", "defaultAvatar.png", 0, "")
+            gameController.initialize(selectedPlayer1!!, player2)
+        }
     }
 }
 
 
 
-fun iniciarBatalla() {
-    iniciarBatallaBoton.setOnAction {
-        siguientePantalla = "/org/example/batalladegallos/gui/game-screen.fxml"
-        siguienteTitulo = "Batalla de Gallos - Arena de Combate"
-        val currentStage = iniciarBatallaBoton.scene.window as Stage
-        val fxmlLoader = FXMLLoader(javaClass.getResource(siguientePantalla))
-        val newScene = Scene(fxmlLoader.load())
-        currentStage.title = siguienteTitulo
-        currentStage.scene = newScene
-        currentStage.show()
-
-        val gameController = fxmlLoader.getController<GameController>()
-        val player2 = selectedPlayer2 ?: Participante("Default Player", "defaultAvatar.png", 0, "")
-        gameController.initialize(selectedPlayer1!!, player2)
-    }
-}
-}
 
 
+/*  //HAY QUE CAMBIAR TAMBIÉN ESTO, ES SUPONIENDO QUE EL GALLO ESTÁ CREADO. MODIFICAAAR
+  private var gallosDisponibles: MutableList<Participante> = mutableListOf(
+      Participante("Gallo1", "", 0), Participante("Gallo2", "", 0)
+  )
+  private var gallosSeleccionados: MutableList<Participante> = mutableListOf()
 
-
-
-    /*  //HAY QUE CAMBIAR TAMBIÉN ESTO, ES SUPONIENDO QUE EL GALLO ESTÁ CREADO. MODIFICAAAR
-      private var gallosDisponibles: MutableList<Participante> = mutableListOf(
-          Participante("Gallo1", "", 0), Participante("Gallo2", "", 0)
-      )
-      private var gallosSeleccionados: MutableList<Participante> = mutableListOf()
-
-      fun seleccionarGallo(): Boolean {
-          val gallo = gallosDisponibles.find { it.nombre == nombre }
-          if (gallo != null) {
-              gallosSeleccionados.add(gallo)
-              gallosDisponibles.remove(gallo)
-              return true
-          }
-          return false
+  fun seleccionarGallo(): Boolean {
+      val gallo = gallosDisponibles.find { it.nombre == nombre }
+      if (gallo != null) {
+          gallosSeleccionados.add(gallo)
+          gallosDisponibles.remove(gallo)
+          return true
       }
+      return false
+  }
 
-      fun obtenerGallosDisponibles(): List<Participante> {
-          return gallosDisponibles
-      }
+  fun obtenerGallosDisponibles(): List<Participante> {
+      return gallosDisponibles
+  }
 
-      fun obtenerGallosSeleccionados(): List<Participante> {
-          return gallosSeleccionados
-      }
+  fun obtenerGallosSeleccionados(): List<Participante> {
+      return gallosSeleccionados
+  }
 
-      fun resetearSeleccion() {
-          gallosDisponibles.addAll(gallosSeleccionados)
-          gallosSeleccionados.clear()
-      }
+  fun resetearSeleccion() {
+      gallosDisponibles.addAll(gallosSeleccionados)
+      gallosSeleccionados.clear()
+  }
 
-      fun hayGallosDisponibles(): Boolean {
-          return gallosDisponibles.isNotEmpty()
-      }
+  fun hayGallosDisponibles(): Boolean {
+      return gallosDisponibles.isNotEmpty()
+  }
 
-      fun iniciarBatalla() {
-          iniciarBatallaBoton.setOnAction {
-              println("Iniciando batalla con los siguientes gallos:")
-              siguientePantalla = "/org/example/batalladegallos/gui/game-screen.fxml"
-              siguienteTitulo = "Batalla de Gallos - Arena de Combate"
-              val currentStage = iniciarBatallaBoton.scene.window as Stage
-              val fxmlLoader = FXMLLoader(javaClass.getResource(siguientePantalla))
-              val newScene = Scene(fxmlLoader.load())
-              currentStage.title = siguienteTitulo
-              currentStage.scene = newScene
-              currentStage.show()
-
-          }
+  fun iniciarBatalla() {
+      iniciarBatallaBoton.setOnAction {
+          println("Iniciando batalla con los siguientes gallos:")
+          siguientePantalla = "/org/example/batalladegallos/gui/game-screen.fxml"
+          siguienteTitulo = "Batalla de Gallos - Arena de Combate"
+          val currentStage = iniciarBatallaBoton.scene.window as Stage
+          val fxmlLoader = FXMLLoader(javaClass.getResource(siguientePantalla))
+          val newScene = Scene(fxmlLoader.load())
+          currentStage.title = siguienteTitulo
+          currentStage.scene = newScene
+          currentStage.show()
 
       }
 
-      fun main() {
-          val scanner = Scanner(System.`in`)
-          val controller = CharacterSelectionController()
-          var continuar = true
+  }
 
-          while (continuar && controller.hayGallosDisponibles()) {
-              println("Gallos disponibles para seleccionar:")
-              controller.obtenerGallosDisponibles().forEach {
-                  println("${it.nombre} - ${it.urlFotoPerfil}")
-              }
+  fun main() {
+      val scanner = Scanner(System.`in`)
+      val controller = CharacterSelectionController()
+      var continuar = true
 
-              println("Ingrese el apodo del gallo a seleccionar o 'exit' para salir:")
-              val input = scanner.nextLine()
-
-              if (input == "exit") {
-                  println("Finalizando la selección de personajes.")
-                  continuar = false
-              } else if (controller.seleccionarGallo()) {
-                  println("Gallo seleccionado con éxito.")
-              } else {
-                  println("Gallo no disponible o ya seleccionado.")
-              }
-          }
-
-          println("Selección finalizada. Gallos seleccionados:")
-          controller.obtenerGallosSeleccionados().forEach {
+      while (continuar && controller.hayGallosDisponibles()) {
+          println("Gallos disponibles para seleccionar:")
+          controller.obtenerGallosDisponibles().forEach {
               println("${it.nombre} - ${it.urlFotoPerfil}")
           }
-      } */
 
+          println("Ingrese el apodo del gallo a seleccionar o 'exit' para salir:")
+          val input = scanner.nextLine()
 
+          if (input == "exit") {
+              println("Finalizando la selección de personajes.")
+              continuar = false
+          } else if (controller.seleccionarGallo()) {
+              println("Gallo seleccionado con éxito.")
+          } else {
+              println("Gallo no disponible o ya seleccionado.")
+          }
+      }
 
+      println("Selección finalizada. Gallos seleccionados:")
+      controller.obtenerGallosSeleccionados().forEach {
+          println("${it.nombre} - ${it.urlFotoPerfil}")
+      }
+  } */
 
 
 

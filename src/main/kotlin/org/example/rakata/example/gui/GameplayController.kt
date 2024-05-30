@@ -65,22 +65,22 @@ class GameController {
     private val palabrasPlayer1 = Palabras("Rima 1", mutableListOf("Palabra 1", "Palabra 2", "Palabra 3"))
     private val palabrasPlayer2 = Palabras("Rima 2", mutableListOf("Palabra 4", "Palabra 5", "Palabra 6"))
 
-fun initialize(player1Data: Participante, player2Data: Participante) {
-    player1 = player1Data
-    player2 = player2Data
-    player1Name.text = player1.nombre
-    player2Name.text = player2.nombre
-    updateAvatar(player1.urlFotoPerfil, avatarPlayer1)
-    updateAvatar(player2.urlFotoPerfil, avatarPlayer2)
-    updateMenuItemsWords()
-    startRound()
+    fun initialize(player1Data: Participante, player2Data: Participante) {
+        player1 = player1Data
+        player2 = player2Data
+        player1Name.text = player1.nombre
+        player2Name.text = player2.nombre
+        updateAvatar(player1.urlFotoPerfil, avatarPlayer1)
+        updateAvatar(player2.urlFotoPerfil, avatarPlayer2)
+        updateMenuItemsWords()
+        startRound()
 
-}
+    }
 
 
     private fun updateAvatar(url: String, imageView: javafx.scene.image.ImageView) {
         val avatarPath = "/org/example/batalladegallos/images/$url"
-        val image = javafx.scene.image.Image(javaClass.getResource(avatarPath).toExternalForm())
+        val image = Image(javaClass.getResource(avatarPath).toExternalForm())
         imageView.setImage(image)
     }
     private fun updateMenuItemsWords() {
@@ -105,6 +105,7 @@ fun initialize(player1Data: Participante, player2Data: Participante) {
 
     private fun startRound() {
         currentRound++
+        print("Starting round $currentRound")
         roundCounter.text = "Round: $currentRound"
         player1Name.text = player1.nombre
         player2Name.text = player2.nombre
@@ -136,56 +137,44 @@ fun initialize(player1Data: Participante, player2Data: Participante) {
         progressBar.progress -= 1.0 / 30
     }
 
- private fun switchPlayer(currentPlayerProgressBar: ProgressBar, currentPlayerScore: Label, players: List<ProgressBar>, labels: List<Label>) {
-    currentPlayerProgressBar.style = "-fx-accent: gray;"
-    try {
-        currentPlayerScore.text = (currentPlayerScore.text.toDouble() + aplaudimetroProgress.progress).toString()
-    } catch (e: NumberFormatException) {
-        currentPlayerScore.text = aplaudimetroProgress.progress.toString()
-        println("Error: ${e.message}")
-    }
-    currentPlayer = 3 - currentPlayer
-    val nextPlayerProgressBar = players[currentPlayer - 1]
-    val nextPlayerLabel = labels[currentPlayer - 1]
-    nextPlayerProgressBar.progress = 1.0
-    nextPlayerProgressBar.style = "-fx-accent: blue;"
-    nextPlayerLabel.text = "${(nextPlayerProgressBar.progress * 30).toInt()} segundos restantes"
-    if (currentPlayer == 1) {
-        currentRound++
-        if (currentRound < 3) {
-            startRound()
-        } else {
-            goRanking()
+    private fun switchPlayer(currentPlayerProgressBar: ProgressBar, currentPlayerScore: Label, players: List<ProgressBar>, labels: List<Label>) {
+        currentPlayerProgressBar.style = "-fx-accent: gray;"
+        try {
+            currentPlayerScore.text = (currentPlayerScore.text.toDouble() + aplaudimetroProgress.progress).toString()
+
+        } catch (e: NumberFormatException) {
+
+            println("Error: ${e.message}")
         }
+        currentPlayer = 3 - currentPlayer
+        val nextPlayerProgressBar = players[currentPlayer - 1]
+        val nextPlayerLabel = labels[currentPlayer - 1]
+        nextPlayerProgressBar.progress = 1.0
+        nextPlayerLabel.text = "${(nextPlayerProgressBar.progress * 30).toInt()} segundos restantes"
+        if (currentPlayer == 1) {
+            currentRound++
+            rondaCounter.text = "Round: $currentRound"
+            if (currentRound < 3) {
+                startRound()
+            } else {
+                goRanking()
+            }
+        }
+
     }
-    // Call updatePlayerTurn function when the player's turn changes
-    updatePlayerTurn(currentPlayer == 1)
-}
 
     private fun updateLabel(progressBar: ProgressBar, label: Label) {
-        label.text = "${(progressBar.progress * 30).toInt()} segundos restantes"
+        println(label)
+        println(" dopfskopdsfkoprfdskopfdskdopsfkfdopsk ")
+        val secondsLeft = (progressBar.progress * 30).toInt()
+        if (secondsLeft  <= 0) {
+            label.text = "Esperando Turno"
+        } else {
+            label.text = "$secondsLeft segundos"
+        }
+
     }
 
-
-fun updatePlayerTurn(isPlayer1Turn: Boolean) {
-    val glow = Glow(0.8)
-
-    if (isPlayer1Turn) {
-        avatarPlayer1.image = Image("/images/${player1.urlFotoPerfil}")
-        tiempoPlayer1.text = "Current Time"
-        avatarPlayer1.effect = glow
-        avatarPlayer2.image = Image("/images/${player2.urlFotoPerfil.substringBeforeLast('.') + "BN" + player2.urlFotoPerfil.substringAfterLast('.')}")
-        tiempoPlayer2.text = "Esperando Turno"
-        avatarPlayer2.effect = null
-    } else {
-        avatarPlayer1.image = Image("/images/${player1.urlFotoPerfil.substringBeforeLast('.') + "BN" + player1.urlFotoPerfil.substringAfterLast('.')}")
-        tiempoPlayer1.text = "Esperando Turno"
-        avatarPlayer1.effect = null
-        avatarPlayer2.image = Image("/images/${player2.urlFotoPerfil}")
-        tiempoPlayer2.text = "Current Time"
-        avatarPlayer2.effect = glow
-    }
-}
 
     fun goRanking() {
         siguientePantalla = "/org/example/batalladegallos/gui/ranking-screen.fxml"

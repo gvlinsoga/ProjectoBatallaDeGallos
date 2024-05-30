@@ -1,0 +1,45 @@
+/* Define the custom font */
+.sedgwick-ave-regular {
+    -fx-font-family: "Sedgwick Ave", cursive;
+    -fx-font-weight: 400;
+    -fx-font-style: normal;
+}
+
+/* Style for the title text */
+#titleRanking {
+    -fx-font-size: 48px;
+    -fx-fill: #FECC16; /* Yellow */
+    -fx-effect: dropshadow(gaussian, #FFFF00, 20, 0.5, 0, 0);
+}
+
+/* Style for the buttons */
+.button {
+    -fx-font-size: 16px;
+    -fx-background-color: #FECC16; /* Yellow */
+    -fx-text-fill: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+}
+
+/* Hover effect with glow for buttons */
+.button:hover {
+    -fx-background-color: #FECC16; /* Yellow */
+    -fx-effect: dropshadow(gaussian, #FFFF00, 20, 0.5, 0, 0);
+}
+
+/* Style for the TableView */
+.table-view {
+    -fx-background-color: transparent;
+}
+
+/* Style for the TableColumns */
+.table-column {
+    -fx-font-size: 16px;
+    -fx-alignment: CENTER;
+}
+
+/* Background gradient for the AnchorPane */
+.anchor-pane {
+    -fx-background-color: linear-gradient(#DD0741, #293178);
+}

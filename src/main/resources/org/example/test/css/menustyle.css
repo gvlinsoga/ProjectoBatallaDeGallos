@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'GraffittiFont';
-    src: url('../../../fonts/sedgwickavedisplay-regular.ttf');
+    src: url('/fonts/sedgwickavedisplay-regular.ttf');
 }
 .root {
     -fx-font-family: 'GraffittiFont';
